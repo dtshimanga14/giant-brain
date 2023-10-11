@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "deploy": "serverless config credentials --overwrite --provider aws --key AKIATZQERVHNJCQCZ4UO --secret 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"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1472.0"
+  }
+}
