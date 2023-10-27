@@ -3,6 +3,7 @@
     "deploy": "serverless config credentials --overwrite --provider aws --key AKIATZQERVHNJCQCZ4UO --secret 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"
   },
   "dependencies": {
+    "aws-cli": "^0.0.2",
     "aws-sdk": "^2.1472.0"
   }
 }

@@ -1,0 +1,62 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "HelloWorld": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "FunctionName": "hello-world",
+            "Handler": "index.handler",
+            "Role": {
+              "Fn::GetAtt": [
+                "HelloWorldLambdaRole",
+                "Arn"
+              ]
+            },       
+            "Code": {
+              "S3Bucket": "giant-brain-serverless-api",
+              "S3Key": "index.zip"
+            },
+            "Runtime": "nodejs18.x"    
+          }
+        },
+        "HelloWorldLambdaRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "RoleName": "HelloWorldLambdaRole",
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [{
+                  "Effect": "Allow",
+                  "Action": [ 
+                    "sts:AssumeRole"
+                ]
+                }],
+                "Resource": "*"
+              },
+              "Path": "/",
+              "Policies": [{
+                "PolicyName": "AWSLambdaBasicExecutionRole",
+                "PolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [{
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [ "lambda.amazonaws.com" ]
+                    },
+                    "Action": [
+                      "iam:CreateRole",
+                      "iam:CreatePolicy",
+                      "iam:PutRolePolicy",
+                      "iam:AttachRolePolicy",
+                      "logs:CreateLogGroup",
+                      "logs:CreateLogStream",
+                      "logs:PutLogEvents"
+                    ],
+                    "Resource": "*"
+                  }]
+                }
+              }]
+            }
+          }
+      }
+}
