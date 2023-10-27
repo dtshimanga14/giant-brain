@@ -4,16 +4,16 @@ phases:
   install:
     runtime-versions:
         nodejs: 18
-    commands:
-        - echo Installing dependencies...
-        - npm install
 
   build:
     commands:
-        - echo Build started on `date`
-        - echo Compiling the Node.js code...
+        - echo Installing dependencies...
+        - npm ci
+        - npm install- export BUCKET=giant-brain-serverless-ap
+        - aws cloudformation package --template-file cloudFormation.json --s3-bucket $BUCKET --s3-prefix codepipeline --output-template-file outputtemplate.yml
 
 artifacts:
+  type: zip
   files:
-    - '**/*'
-  discard-paths: yes
+    - template.yml
+    - outputtemplate.yml

@@ -1,4 +1,4 @@
-service: giant-brian
+service: giant-brain
 frameworkVersion: '3'
 
 provider:
