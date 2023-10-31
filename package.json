@@ -1,10 +1,13 @@
 {
   "scripts": {
-    "deploy": "cd ./terraform && terraform apply && serverless config credentials --overwrite --provider aws --key AKIATZQERVHNJCQCZ4UO --secret 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"
+    "deploy": "cd ./terraform && cross-env STACK=daniel AWS_ACCESS_KEY=AKIATZQERVHNJCQCZ4UO AWS_SECRET_ACCESS_KEY=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 AWS_REGION=us-west-1 && terraform init && terraform apply -var stack=daniel && serverless config credentials --overwrite --provider aws --key AKIATZQERVHNJCQCZ4UO --secret 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",
+    "destroy": "cd ./terraform && terraform destroy",
+    "start": "cross-env PORT=9000node ./server.js"
   },
   "dependencies": {
     "aws-cli": "^0.0.2",
     "aws-sdk": "^2.1472.0",
+    "cross-env": "^7.0.3",
     "express": "^4.18.2"
   }
 }

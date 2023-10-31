@@ -7,21 +7,25 @@ terraform {
   }
 }
 
-provider "docker" {
-  host    = "npipe:////.//pipe//docker_engine"
+variable "stack" {
+  type = string
 }
 
-resource "docker_image" "giant-brain" {
-  name         = "giant-brain"
-  keep_locally = false
-}
+module "dynamodb_table" {
+  source   = "terraform-aws-modules/dynamodb-table/aws"
 
-resource "docker_container" "giant-brain" {
-  image = docker_image.giant-brain.image_id
-  name  = "tutorial"
+  name     = "${var.stack}-users-giant-brain-api"
+  hash_key = "id"
 
-  ports {
-    internal = 7000
-    external = 8000
+  attributes = [
+    {
+      name = "id"
+      type = "N"
+    }
+  ]
+
+  tags = {
+    Terraform   = "true"
+    Environment = "staging"
   }
 }
