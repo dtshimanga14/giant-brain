@@ -51,3 +51,14 @@ spec:
       port: 3000
       targetPort: 3000
       nodePort: 30000
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dockerhub-secret
+type: Opaque
+data:
+  docker-username: dHNoaW1z
+  docker-password: VHNoMW00bmc0I0A=
+  docker-email: a2Fzc2FtcHUudHNoaW1hbmdhQGdtYWlsLmNvbQ==
+  docker-server: aHR0cHM6Ly9pbmRleC5kb2NrZXIuaW8vdjEv
