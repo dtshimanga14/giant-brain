@@ -1,11 +1,15 @@
 const express = require('express');
+const cors = require('cors');
+const { getAllSurvey } = require('./db/survey.js');
+
 const app = express();
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 9000;
+app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+    res.send({ message: 'Hello World!' });
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`http://localhost:${port}`);
 });

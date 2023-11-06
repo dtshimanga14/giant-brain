@@ -1,10 +1,24 @@
 service: giant-brain
 frameworkVersion: '3'
-
 provider:
   name: aws
   runtime: nodejs18.x
-
+  region: us-east-1
+package:
+  patterns:
+    - '!.git/**'
+    - '!test/**'
+    - '!e2e/**'
+    - '!src/**'
+    - '!node_modules/**'
+    - '!.serverless/**'
+    - '!.serverless_plugins/**'
+    - '!terraform/**'
 functions:
-  function1:
-    handler: index.handler
+  getUsers:
+    handler: handler.getUsers
+    events:
+      - http:
+          path: /users
+          method: get
+          cors: true

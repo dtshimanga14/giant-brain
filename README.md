@@ -70,3 +70,17 @@ Which should result in response similar to the following:
     "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
 }
 ```
+
+### build a docker image for the api
+run `docker build -t gb-api-app:latest .` in the current folder
+
+
+### Push the image to Google Artifact Repository
+Authenticate Docker to GCR using the Google Cloud SDK
+run `gcloud auth configure-docker`
+`gcloud auth configure-docker us-east4-docker.pkg.dev`
+`docker login gcr.io`
+
+`docker tag gb-api-app:latest us-east4-docker.pkg.dev/giant-brain-artifact/giant-brain-repository/gb-api-app:latest`
+Push the Docker image to GCR: us-east4
+`docker push us-east4-docker.pkg.dev/giant-brain-artifact/giant-brain-repository/gb-api-app:latest`
